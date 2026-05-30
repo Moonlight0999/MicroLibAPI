@@ -4,25 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+@Getter @Setter
 @Entity
-public class Book {
+public class Books {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long book_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private Users users;
-    @Getter @Setter
+    private Users user_id;
     private String title;
-    @Getter @Setter
+    private String description;
     private String author;
-    @Getter @Setter
     private String publisher;
-    @Getter @Setter
-    private Date publishedDate;
-    @Getter @Setter
-    private String text;
-
+    private LocalDate published_date;
 }

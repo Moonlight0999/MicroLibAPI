@@ -1,11 +1,12 @@
 package Spring_Project.MicroLibAPI.repository;
 
-import Spring_Project.MicroLibAPI.domain.Book;
+import Spring_Project.MicroLibAPI.domain.Books;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BookRepository {
-    Book save(Book book);
+    Books save(Books book);
 
-    Optional<Book> findById(Long id);
+    List<Books> findAll();
 }

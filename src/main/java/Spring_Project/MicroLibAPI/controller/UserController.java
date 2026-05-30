@@ -36,19 +36,16 @@ public class UserController {
 
     @PostMapping("users/new")
     public String register(UserCreateRequestDTO request) {
-        Long user_id = userService.signUp(request);
+        userService.signUp(request);
 
-        return "redirect:/users/${user_id}";
+        return "redirect:/";
     }
 
     @GetMapping("/users/{user_id}")
     public String userProfileForm(@PathVariable("user_id") Long user_id, Model model) {
         UserResponseDTO response = userService.findById(user_id);
 
-        model.addAttribute("user_id", response.getUser_id());
-        model.addAttribute("name", response.getName());
-        model.addAttribute("login_id", response.getLogin_id());
-        model.addAttribute("password", response.getPassword());
+        model.addAttribute("user", response);
 
         return "users/userProfileForm";
     }
