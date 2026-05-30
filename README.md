@@ -33,37 +33,3 @@
 | 책 상세보기    | GET    | books/${book_id} |                      | BookResponseDTO     | 200 OK         |
 | 책 정보 수정   | UPDATE | books/${book_id} |                      |                     | 204 No Content |
 | 책 삭제        | DELETE | books/${book_id} |                      |                     | 200 OK         |
-
-## DTO
-
-| DTO                  | field                |
-| -------------------- | -------------------- |
-| UserCreateRequestDTO | user_name: (String), |
-
-login_id: (String),
-password: (String) |
-| LoginRequestDTO | login_id: (String),
-password: (String) |
-| UserResponseDTO | user_name: (String),
-login_id: (String),
-password: (String) |
-| UserPatchRequestDTO | Map<String, Object> {
-user_name: (String),
-login_id: (String),
-password: (String)
-} |
-| BookCreateRequestDTO | book_id : (int),
-user_id : (int),
-title: (String),
-text: (String),
-author: (String),
-publisher: (String),
-publication_year : (datetime) |
-| BookListResponseDTO | List<Book> |
-| BookResponseDTO | book_id : (int),
-user_id : (int),
-title: (String),
-text: (String),
-author: (String),
-publisher: (String),
-publication_year : (datetime) |
