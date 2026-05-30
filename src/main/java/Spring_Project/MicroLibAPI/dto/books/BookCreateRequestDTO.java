@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 public class BookCreateRequestDTO {
-    private final Users user_id;
+    private Users user_id;
     private String title;
     private String description;
     private String author;

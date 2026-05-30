@@ -10,7 +10,7 @@
 <p th:text="'user.password: ' + ${user.password}"></p>
 <form action="/users/patch" method="post">
     <div class="form-group">
-        <input type="hidden" name="user_id" th:value="${user_id}">
+        <input type="hidden" name="user_id" th:value="${user.user_id}">
         <label for="name">이름</label>
         <input type="text" id="name" name="name" placeholder="변경할 이름을 입력하세요">
         <label for="login_id">아이디</label>

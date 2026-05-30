@@ -1,7 +1,6 @@
 package Spring_Project.MicroLibAPI.controller;
 
 import Spring_Project.MicroLibAPI.dto.books.BookCreateRequestDTO;
-import Spring_Project.MicroLibAPI.dto.books.BookListRequestDTO;
 import Spring_Project.MicroLibAPI.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
