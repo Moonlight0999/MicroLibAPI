@@ -22,10 +22,7 @@ public class UserService {
     }
 
     public Long signUp(UserCreateRequestDTO request) {
-        Users user = new Users();
-        user.setName(request.getName());
-        user.setLogin_id(request.getLogin_id());
-        user.setPassword(request.getPassword());
+        Users user = request.toEntity();
         userRepository.save(user);
         return user.getUser_id();
     }

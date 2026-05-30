@@ -5,9 +5,9 @@
     <title>Profile</title>
 </head>
 <body>
-<p th:text="'user.name: ' + ${name}"></p>
-<p th:text="'user.id: ' + ${login_id}"></p>
-<p th:text="'user.password: ' + ${password}"></p>
+<p th:text="'user.name: ' + ${user.name}"></p>
+<p th:text="'user.id: ' + ${user.login_id}"></p>
+<p th:text="'user.password: ' + ${user.password}"></p>
 <form action="/users/patch" method="post">
     <div class="form-group">
         <input type="hidden" name="user_id" th:value="${user_id}">

@@ -44,10 +44,7 @@ public class UserController {
     public String userProfileForm(@PathVariable("user_id") Long user_id, Model model) {
         UserResponseDTO response = userService.findById(user_id);
 
-        model.addAttribute("user_id", response.getUser_id());
-        model.addAttribute("name", response.getName());
-        model.addAttribute("login_id", response.getLogin_id());
-        model.addAttribute("password", response.getPassword());
+        model.addAttribute("user", response);
 
         return "users/userProfileForm";
     }

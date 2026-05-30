@@ -1,5 +1,6 @@
 package Spring_Project.MicroLibAPI.dto.users;
 
+import Spring_Project.MicroLibAPI.domain.Users;
 import lombok.Getter;
 
 @Getter
@@ -14,4 +15,11 @@ public class UserCreateRequestDTO {
         this.password = password;
     }
 
+    public Users toEntity() {
+        Users users = new Users();
+        users.setName(name);
+        users.setLogin_id(login_id);
+        users.setPassword(password);
+        return users;
+    }
 }
