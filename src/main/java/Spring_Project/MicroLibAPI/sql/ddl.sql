@@ -1,0 +1,8 @@
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    login_id VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+DROP TABLE users
