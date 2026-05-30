@@ -16,4 +16,10 @@ public class Users {
     private String login_id;
     @Getter @Setter
     private String password;
+
+    public void patchProfile(String name, String login_id, String password) {
+        if (name != null) this.name = name;
+        if (login_id != null) this.login_id = login_id;
+        if (password != null) this.password = password;
+    }
 }

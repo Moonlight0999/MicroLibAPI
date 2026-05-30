@@ -1,4 +1,4 @@
-package Spring_Project.MicroLibAPI.dto;
+package Spring_Project.MicroLibAPI.dto.users;
 
 import lombok.Getter;
 

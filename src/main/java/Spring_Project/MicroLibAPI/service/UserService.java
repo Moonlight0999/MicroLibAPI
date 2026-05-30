@@ -1,9 +1,16 @@
 package Spring_Project.MicroLibAPI.service;
 
 import Spring_Project.MicroLibAPI.domain.Users;
+import Spring_Project.MicroLibAPI.dto.users.UserCreateRequestDTO;
+import Spring_Project.MicroLibAPI.dto.users.UserPatchRequestDTO;
+import Spring_Project.MicroLibAPI.dto.users.UserResponseDTO;
 import Spring_Project.MicroLibAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+import static java.lang.System.getProperties;
 
 @Transactional
 public class UserService {
@@ -14,8 +21,27 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Long signUp(Users user) {
+    public Long signUp(UserCreateRequestDTO request) {
+        Users user = new Users();
+        user.setName(request.getName());
+        user.setLogin_id(request.getLogin_id());
+        user.setPassword(request.getPassword());
         userRepository.save(user);
         return user.getUser_id();
+    }
+
+    public UserResponseDTO findById(Long user_id) {
+        Users user = userRepository.findById(user_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 없습니다. user_id: " + user_id));
+
+        return new UserResponseDTO(user);
+    }
+
+    public void patchUser(UserPatchRequestDTO request) {
+        Users user = userRepository.findById(request.getUser_id())
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 없습니다. user_id: " + request.getUser_id()));
+
+        user.patchProfile(request.getName(), request.getLogin_id(), request.getPassword());
+        userRepository.save(user);
     }
 }

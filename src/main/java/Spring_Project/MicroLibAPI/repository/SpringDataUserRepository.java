@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface SpringDataUserRepository extends UserRepository, JpaRepository<Users, Long> {
 
     Optional<Users> findByName(String name);
+    @Override
+    Optional<Users> findById(Long id);
 }

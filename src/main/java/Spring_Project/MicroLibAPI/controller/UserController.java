@@ -1,14 +1,19 @@
 package Spring_Project.MicroLibAPI.controller;
 
 import Spring_Project.MicroLibAPI.domain.Users;
-import Spring_Project.MicroLibAPI.dto.*;
+import Spring_Project.MicroLibAPI.dto.users.UserCreateRequestDTO;
+import Spring_Project.MicroLibAPI.dto.users.UserPatchRequestDTO;
+import Spring_Project.MicroLibAPI.dto.users.UserResponseDTO;
 import Spring_Project.MicroLibAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -19,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index() {
         return "index";
     }
@@ -31,13 +36,27 @@ public class UserController {
 
     @PostMapping("users/new")
     public String register(UserCreateRequestDTO request) {
-        Users user = new Users();
-        user.setName(request.getName());
-        user.setLogin_id(request.getLogin_id());
-        user.setPassword(request.getPassword());
+        Long user_id = userService.signUp(request);
 
-        Long userId = userService.signUp(user);
+        return "redirect:/users/${user_id}";
+    }
 
-        return "redirect:/index";
+    @GetMapping("/users/{user_id}")
+    public String userProfileForm(@PathVariable("user_id") Long user_id, Model model) {
+        UserResponseDTO response = userService.findById(user_id);
+
+        model.addAttribute("user_id", response.getUser_id());
+        model.addAttribute("name", response.getName());
+        model.addAttribute("login_id", response.getLogin_id());
+        model.addAttribute("password", response.getPassword());
+
+        return "users/userProfileForm";
+    }
+
+    @PostMapping("/users/patch")
+    public String patchUserInfo(UserPatchRequestDTO request) {
+        userService.patchUser(request);
+
+        return "redirect:/";
     }
 }

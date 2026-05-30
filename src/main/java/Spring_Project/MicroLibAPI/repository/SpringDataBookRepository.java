@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface SpringDataBookRepository extends BookRepository, JpaRepository<Book, Long> {
 
-    Optional<Book> findByTitle(String title);
 }
