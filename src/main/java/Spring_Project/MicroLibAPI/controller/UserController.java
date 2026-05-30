@@ -37,8 +37,7 @@ public class UserController {
     @PostMapping("users/new")
     public String register(UserCreateRequestDTO request) {
         Long user_id = userService.signUp(request);
-
-        return "redirect:/users/${user_id}";
+        return "redirect:/users/" +  user_id;
     }
 
     @GetMapping("/users/{user_id}")
