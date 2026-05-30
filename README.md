@@ -25,7 +25,6 @@
 | 기능           | 메서드 | 요청 주소        | INPUT                | OUTPUT              | 상태코드       |
 | -------------- | ------ | ---------------- | -------------------- | ------------------- | -------------- |
 | 회원가입       | POST   | users/new        | UserCreateRequestDTO |                     | 201 Created    |
-| 로그인         | POST   | users/login      | LoginRequestDTO      |                     | 303 See Others |
 | 회원 정보 확인 | GET    | users/${user_id} |                      | UserResponseDTO     | 200 OK         |
 | 회원 정보 수   | PATCH  | users/${user_id} | UserPatchRequestDTO  |                     | 204 No Content |
 | 책 생성        | POST   | books/new        | BookCreateRequestDTO |                     | 201 Created    |
