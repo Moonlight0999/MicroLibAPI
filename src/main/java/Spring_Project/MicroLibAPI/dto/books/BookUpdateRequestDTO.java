@@ -12,16 +12,14 @@ public class BookUpdateRequestDTO {
     private String author;
     private String publisher;
     private LocalDate published_date;
-    private String action;
 
-    public BookUpdateRequestDTO(String title, Long user_id, String description, String author, String publisher, LocalDate published_date, String action) {
+    public BookUpdateRequestDTO(String title, Long user_id, String description, String author, String publisher, LocalDate published_date) {
         this.title = title;
         this.user_id = user_id;
         this.description = description;
         this.author = author;
         this.publisher = publisher;
         this.published_date = published_date;
-        this.action = action;
     }
 
 }

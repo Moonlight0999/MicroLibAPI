@@ -1,18 +1,13 @@
 package Spring_Project.MicroLibAPI.controller;
 
-import Spring_Project.MicroLibAPI.dto.books.BookCreateRequestDTO;
-import Spring_Project.MicroLibAPI.dto.books.BookListResponseDTO;
-import Spring_Project.MicroLibAPI.dto.books.BookResponseDTO;
-import Spring_Project.MicroLibAPI.dto.books.BookUpdateRequestDTO;
+import Spring_Project.MicroLibAPI.dto.books.*;
 import Spring_Project.MicroLibAPI.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class BookController {
     private BookService bookService;
 
@@ -21,46 +16,50 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/books/new")
-    public String createBookForm() {
-        return "/books/createBookForm";
-    }
-
     @PostMapping("/books/new")
-    public String createBook(BookCreateRequestDTO request) {
-        bookService.createBook(request);
+    public ResponseEntity<Long> createBook(@RequestBody BookCreateRequestDTO request) {
+        Long book_id = bookService.createBook(request);
 
-        return "redirect:/books";
+        return ResponseEntity.status(HttpStatus.CREATED).body(book_id);
     }
 
     @GetMapping("/books")
-    public String listBooks(Model model) {
+    public ResponseEntity<BookListResponseDTO> listBooks() {
         BookListResponseDTO response = bookService.findAll();
-        model.addAttribute("books", response.getBooks());
 
-        return  "/books/bookList";
+        return  ResponseEntity.ok(response);
     }
 
     @GetMapping("/books/{book_id}")
-    public String viewBook(@PathVariable("book_id") Long book_id, Model model) {
-        model.addAttribute("book", bookService.findById(book_id));
+    public ResponseEntity<BookResponseDTO> viewBook(@PathVariable("book_id") Long book_id) {
+         BookResponseDTO response = bookService.findById(book_id);
 
-        return "/books/bookDetailForm";
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/books/{book_id}")
-    public String updateBook(@PathVariable("book_id") Long book_id, BookUpdateRequestDTO request) {
+    @PutMapping("/books/{book_id}")
+    public ResponseEntity<BookResponseDTO> updateBook(@PathVariable("book_id") Long book_id, @RequestBody BookUpdateRequestDTO request) {
         BookResponseDTO book = bookService.findById(book_id);
 
-        if (request.getAction().equals("update")) {
-            bookService.updateBook(book_id, request);
-        }
-        else if (request.getAction().equals("delete") && book.getUser_id().equals(request.getUser_id())) {
-            bookService.deleteById(book_id);
-
-            return  "redirect:/books";
+        if (!book.getUser_id().equals(request.getUser_id())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        return  "redirect:/books/" + book_id;
+        bookService.updateBook(book_id, request);
+        BookResponseDTO updatedBook = bookService.findById(book_id);
+
+        return ResponseEntity.ok(updatedBook);
+    }
+
+    @DeleteMapping("/books/{book_id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable("book_id") Long book_id, @RequestBody BookDeleteRequestDTO request) {
+        BookResponseDTO book = bookService.findById(book_id);
+
+        if (!book.getUser_id().equals(request.getUser_id())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        bookService.deleteById(book_id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -23,29 +23,30 @@ public class BookService {
     }
 
     public BookResponseDTO findById(Long book_id) {
-        Optional<Books> book = Optional.of(bookRepository.findById(book_id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 책이 존재하지 없습니다. book_id: " + book_id)));
+        Books book = bookRepository.findById(book_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 책이 존재하지 없습니다. book_id: " + book_id));
 
-        return new BookResponseDTO(book.get());
+        return new BookResponseDTO(book);
     }
 
     public BookListResponseDTO findAll() {
         return new BookListResponseDTO(bookRepository.findAll());
     }
 
-    public void createBook(BookCreateRequestDTO request) {
-        Optional<Users> user = Optional.of(userRepository.findById(request.getUser_id())
-                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 없습니다. book_id: " + request.getUser_id())));
+    public Long createBook(BookCreateRequestDTO request) {
+        Users user = userRepository.findById(request.getUser_id())
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 없습니다. book_id: " + request.getUser_id()));
 
-        Books book = request.toEntity(user.get());
+        Books book = request.toEntity(user);
         bookRepository.save(book);
+        return book.getBook_id();
     }
 
     public void updateBook(Long book_id, BookUpdateRequestDTO request) {
-        Optional<Books> book = Optional.of(bookRepository.findById(book_id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 책이 존재하지 없습니다. book_id: " + book_id)));
+        Books book = bookRepository.findById(book_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 책이 존재하지 없습니다. book_id: " + book_id));
 
-        book.get().update(request);
+        book.update(request);
     }
 
     public void deleteById(Long book_id) {
