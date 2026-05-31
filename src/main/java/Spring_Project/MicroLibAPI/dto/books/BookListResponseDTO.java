@@ -6,10 +6,10 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class BookListRequestDTO {
+public class BookListResponseDTO {
     private List<Books> Books;
 
-    public BookListRequestDTO(List<Books> Books) {
+    public BookListResponseDTO(List<Books> Books) {
         this.Books = Books;
     }
 }

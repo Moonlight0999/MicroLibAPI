@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.security.PublicKey;
-
 @Configuration
 public class SpringConfig {
     private final UserRepository userRepository;
@@ -27,6 +25,6 @@ public class SpringConfig {
     }
     @Bean
     public BookService bookService() {
-        return new BookService(bookRepository);
+        return new BookService(bookRepository,  userRepository);
     }
 }

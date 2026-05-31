@@ -37,14 +37,13 @@ public class UserController {
     @PostMapping("users/new")
     public String register(UserCreateRequestDTO request) {
         Long user_id = userService.signUp(request);
+
         return "redirect:/users/" +  user_id;
     }
 
     @GetMapping("/users/{user_id}")
     public String userProfileForm(@PathVariable("user_id") Long user_id, Model model) {
-        UserResponseDTO response = userService.findById(user_id);
-
-        model.addAttribute("user", response);
+        model.addAttribute("user", userService.findById(user_id));
 
         return "users/userProfileForm";
     }

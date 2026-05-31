@@ -8,10 +8,6 @@ import Spring_Project.MicroLibAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
-import static java.lang.System.getProperties;
-
 @Transactional
 public class UserService {
 
@@ -24,6 +20,7 @@ public class UserService {
     public Long signUp(UserCreateRequestDTO request) {
         Users user = request.toEntity();
         userRepository.save(user);
+
         return user.getUser_id();
     }
 

@@ -8,14 +8,14 @@ import java.time.LocalDate;
 
 @Getter
 public class BookCreateRequestDTO {
-    private Users user_id;
+    private Long user_id;
     private String title;
     private String description;
     private String author;
     private String publisher;
     private LocalDate published_date;
 
-    public BookCreateRequestDTO(Users user_id, String title, String description, String author, String publisher, LocalDate published_date) {
+    public BookCreateRequestDTO(Long user_id, String title, String description, String author, String publisher, LocalDate published_date) {
         this.user_id = user_id;
         this.title = title;
         this.description = description;
@@ -24,9 +24,9 @@ public class BookCreateRequestDTO {
         this.published_date = published_date;
     }
 
-    public Books toEntity() {
+    public Books toEntity(Users user) {
         Books book = new Books();
-        book.setUser_id(user_id);
+        book.setUser(user);
         book.setTitle(title);
         book.setDescription(description);
         book.setAuthor(author);
