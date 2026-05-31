@@ -1,11 +1,10 @@
 package Spring_Project.MicroLibAPI.controller;
 
-import Spring_Project.MicroLibAPI.domain.Users;
 import Spring_Project.MicroLibAPI.dto.books.BookCreateRequestDTO;
 import Spring_Project.MicroLibAPI.dto.books.BookListResponseDTO;
-import Spring_Project.MicroLibAPI.dto.users.UserResponseDTO;
+import Spring_Project.MicroLibAPI.dto.books.BookResponseDTO;
+import Spring_Project.MicroLibAPI.dto.books.BookUpdateRequestDTO;
 import Spring_Project.MicroLibAPI.service.BookService;
-import Spring_Project.MicroLibAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BookController {
-    private UserService userService;
     private BookService bookService;
 
     @Autowired
-    public BookController(BookService bookService,  UserService userService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.userService = userService;
     }
 
     @GetMapping("/books/new")
@@ -49,5 +46,21 @@ public class BookController {
         model.addAttribute("book", bookService.findById(book_id));
 
         return "/books/bookDetailForm";
+    }
+
+    @PostMapping("/books/{book_id}")
+    public String updateBook(@PathVariable("book_id") Long book_id, BookUpdateRequestDTO request) {
+        BookResponseDTO book = bookService.findById(book_id);
+
+        if (request.getAction().equals("update")) {
+            bookService.updateBook(book_id, request);
+        }
+        else if (request.getAction().equals("delete") && book.getUser_id().equals(request.getUser_id())) {
+            bookService.deleteById(book_id);
+
+            return  "redirect:/books";
+        }
+
+        return  "redirect:/books/" + book_id;
     }
 }

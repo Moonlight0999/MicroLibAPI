@@ -1,5 +1,6 @@
 package Spring_Project.MicroLibAPI.domain;
 
+import Spring_Project.MicroLibAPI.dto.users.UserPatchRequestDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +12,15 @@ public class Users {
     @Column(name= "user_id")
     private Long user_id;
     private String name;
-    private String login_id;
+    private String loginId;
     private String password;
 
-    public void patchProfile(String name, String login_id, String password) {
+    public void patch(UserPatchRequestDTO request) {
+        String name = request.getName();
+        String loginId = request.getLoginId();
+        String password = request.getPassword();
         if (name != null && !name.isBlank()) this.name = name;
-        if (login_id != null && !login_id.isBlank()) this.login_id = login_id;
+        if (loginId != null && !loginId.isBlank()) this.loginId = loginId;
         if (password != null && !password.isBlank()) this.password = password;
     }
 }

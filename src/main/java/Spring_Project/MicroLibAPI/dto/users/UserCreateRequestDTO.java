@@ -6,19 +6,19 @@ import lombok.Getter;
 @Getter
 public class UserCreateRequestDTO {
     private String name;
-    private String login_id;
+    private String loginId;
     private String password;
 
-    public UserCreateRequestDTO(String name, String login_id, String password) {
+    public UserCreateRequestDTO(String name, String loginId, String password) {
         this.name = name;
-        this.login_id = login_id;
+        this.loginId = loginId;
         this.password = password;
     }
 
     public Users toEntity() {
         Users users = new Users();
         users.setName(name);
-        users.setLogin_id(login_id);
+        users.setLoginId(loginId);
         users.setPassword(password);
         return users;
     }

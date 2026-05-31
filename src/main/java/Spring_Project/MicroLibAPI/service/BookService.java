@@ -4,12 +4,12 @@ import Spring_Project.MicroLibAPI.domain.Books;
 import Spring_Project.MicroLibAPI.domain.Users;
 import Spring_Project.MicroLibAPI.dto.books.BookCreateRequestDTO;
 import Spring_Project.MicroLibAPI.dto.books.BookListResponseDTO;
+import Spring_Project.MicroLibAPI.dto.books.BookUpdateRequestDTO;
 import Spring_Project.MicroLibAPI.dto.books.BookResponseDTO;
 import Spring_Project.MicroLibAPI.repository.BookRepository;
 import Spring_Project.MicroLibAPI.repository.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -39,5 +39,18 @@ public class BookService {
 
         Books book = request.toEntity(user.get());
         bookRepository.save(book);
+    }
+
+    public void updateBook(Long book_id, BookUpdateRequestDTO request) {
+        Optional<Books> book = Optional.of(bookRepository.findById(book_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 책이 존재하지 없습니다. book_id: " + book_id)));
+
+        book.get().update(request);
+    }
+
+    public void deleteById(Long book_id) {
+        Optional<Books> book = Optional.of(bookRepository.findById(book_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 책이 존재하지 없습니다. book_id: " + book_id)));
+        bookRepository.deleteById(book_id);
     }
 }

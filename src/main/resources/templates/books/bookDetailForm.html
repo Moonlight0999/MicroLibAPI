@@ -12,5 +12,24 @@
 <p th:text="'publisher: ' + ${book.publisher}">publisher</p>
 <p th:text="'published_date: ' + ${book.published_date}">published_date</p>
 
+<form th:action="@{/books/{id}(id=${book.book_id})}" method="post">
+    <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" placeholder="변경할 제목을 입력하세요">
+        <label for="description">설명글</label>
+        <input type="text" id="description" name="description" placeholder="변경할 설명글을 입력하세요">
+        <label for="author">작가</label>
+        <input type="text" id="author" name="author" placeholder="변경할 작가을 입력하세요">
+        <label for="publisher">출판사</label>
+        <input type="text" id="publisher" name="publisher" placeholder="변경할 출판사를 입력하세요">
+        <label for="published_date">출판년도</label>
+        <input type="date" id="published_date" name="published_date" placeholder="변경할 출판년도를 입력하세요">
+        <p></p>
+        <label for="user_id">작성자</label>
+        <input type="text" id="user_id" name="user_id" placeholder="작성자를 입력하세요">
+        <button type="submit" name="action" value="update">수정</button>
+        <button type="submit" name="action" value="delete">삭제</button>
+    </div>
+</form>
 </body>
 </html>

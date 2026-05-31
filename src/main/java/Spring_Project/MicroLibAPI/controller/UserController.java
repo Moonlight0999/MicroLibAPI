@@ -1,19 +1,12 @@
 package Spring_Project.MicroLibAPI.controller;
 
-import Spring_Project.MicroLibAPI.domain.Users;
 import Spring_Project.MicroLibAPI.dto.users.UserCreateRequestDTO;
 import Spring_Project.MicroLibAPI.dto.users.UserPatchRequestDTO;
-import Spring_Project.MicroLibAPI.dto.users.UserResponseDTO;
 import Spring_Project.MicroLibAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.util.Optional;
 
 @Controller
 public class UserController {

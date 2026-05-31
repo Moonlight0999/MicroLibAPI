@@ -32,10 +32,10 @@ public class UserService {
     }
 
     public void patchUser(UserPatchRequestDTO request) {
-        Users user = userRepository.findById(request.getUser_id())
-                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 없습니다. user_id: " + request.getUser_id()));
+        Users user = userRepository.findByLoginId(request.getLoginId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 없습니다. login_id: " + request.getLoginId()));
 
-        user.patchProfile(request.getName(), request.getLogin_id(), request.getPassword());
+        user.patch(request);
         userRepository.save(user);
     }
 }
