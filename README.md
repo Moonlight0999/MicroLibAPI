@@ -44,3 +44,14 @@
 | BookResponseDTO | book_id : (int),<br>user_id : (int),<br>title: (String),description: (String),<br>author: (String),<br>publisher: (String),<br>published_date : (LocalDate) |
 | BookUpdateRequestDTO | user_id : (int),<br>title: (String),<br>description: (String),<br>author: (String),<br>publisher: (String),<br>published_date : (LocalDate) |
 | BookDeleteRequestDTO | user_id : (int) |
+
+
+- 강의에서 배운 내용 중 이번에 직접 써본 것 3가지
+    - SpringDataJpaRepository를 활용하여 기본적으로 제공되는 메서드 활용
+    - Controller를 이용하여 GET, POST, DELETE등 fetch로 받는 명령 수행
+    - MVC를 분리하여 독립적인 스프링 구현
+- **왜 Controller에서 엔티티를 직접 받지 않고 DTO로 분리했는지** 본인의 언어로 답하기
+    - Controller에서 Service로 Entity를 직접 보내게 되면 필요한 부분말고 불필요한 데이터 또한 전송되게 된다. 이는 단순히 네트워크 상의 불필요한 정보 전달로 인한 낭비도 있지만 보안적인 부분에서도 문제가 생길 수 있음을 알게 되었고, 이를 DTO로 분리함으로써 두 가지의 문제를 해결할 수 있었다.
+- 막혔던 부분 1가지와 어떻게 해결했는지
+    - @Controller를 사용하면 HTML간의 이동도 연결할 수 있지만, 상태코드 반환에 있어서는 부족한 부분이 있었다. 그로 인해 @Controller를 @RestController로 리펙토링 하게 되었는데 RestController는 HTML간의 이동을 조작할 수 없었기에 실제로 작동하는지 확인하는데에 어려움이 있었다.
+    - 기존에 스프링 부트를 작동해서 페이지에서 직접 조작하는 방식 대신에 Test Code를 적극적으로 활용하게 되었고, Test Code의 중요성을 알게 되었다.
