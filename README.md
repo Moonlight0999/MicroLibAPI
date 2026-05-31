@@ -24,9 +24,9 @@
 | -------------- | ------ | ---------------- | -------------------- | ------------------- |
 | 회원가입       | POST   | users/new        | UserCreateRequestDTO |                     |
 | 회원 정보 확인 | GET    | users/${user_id} |                      | UserResponseDTO     |
-| 회원 정보 수   | PATCH  | users/${user_id} | UserPatchRequestDTO  |                     |
+| 회원 정보 수   | PATCH  | users/patch      | UserPatchRequestDTO  |                     |
 | 책 생성        | POST   | books/new        | BookCreateRequestDTO |                     |
 | 책 목록        | GET    | books            |                      | BookListResponseDTO |
 | 책 상세보기    | GET    | books/${book_id} |                      | BookResponseDTO     |
-| 책 정보 수정   | UPDATE | books/${book_id} | BookUpdateRequestDTO |                     |
+| 책 정보 수정   | PUT    | books/${book_id} | BookUpdateRequestDTO |                     |
 | 책 삭제        | DELETE | books/${book_id} | BookUpdateRequestDTO |                     |
