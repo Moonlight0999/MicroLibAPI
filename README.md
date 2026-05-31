@@ -45,6 +45,12 @@
 | BookUpdateRequestDTO | user_id : (int),<br>title: (String),<br>description: (String),<br>author: (String),<br>publisher: (String),<br>published_date : (LocalDate) |
 | BookDeleteRequestDTO | user_id : (int) |
 
+## PostMan
+
+![alt text](Images/PostMan01.png)![alt text](Images/PostMan02.png)
+![alt text](Images/PostMan03.png)![alt text](Images/PostMan04.png)![alt text](Images/PostMan05.png)![alt text](Images/PostMan06.png)
+![alt text](Images/PostMan07.png)![alt text](Images/PostMan08.png)![alt text](Images/PostMan09.png)![alt text](Images/PostMan10.png)
+
 
 - 강의에서 배운 내용 중 이번에 직접 써본 것 3가지
     - SpringDataJpaRepository를 활용하여 기본적으로 제공되는 메서드 활용
